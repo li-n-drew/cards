@@ -778,3 +778,138 @@ img {
     line-height: 1.6;
     margin: 0;
 }
+
+/* ===== ПЛАВАЮЩИЙ БАННЕР С ЭМОДЗИ ===== */
+.floating-gift {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.15));
+    animation: gift-pulse 2s ease-in-out infinite;
+    transition: transform 0.2s ease;
+}
+
+.floating-gift:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.25));
+}
+
+.gift-icon-wrapper {
+    position: relative;
+    display: inline-block;
+    font-size: 72px !important;  /* ← увеличенный размер с приоритетом */
+    line-height: 1;
+}
+
+.gift-emoji {
+    display: block;
+    font-size: inherit; /* наследует размер от родителя */
+}
+
+/* Бейдж-счётчик */
+.gift-badge {
+    position: absolute;
+    top: -4px;
+    right: -6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    background: #0b0c10;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    font-family: var(--font, 'Inter', sans-serif);
+    line-height: 1;
+    text-align: center;
+    border: 2px solid #ffffff;
+}
+
+.gift-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #0b0c10;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(4px);
+    padding: 4px 12px;
+    border-radius: 40px;
+    margin-top: 4px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    white-space: nowrap;
+    transition: background 0.2s;
+}
+
+.floating-gift:hover .gift-label {
+    background: #ffffff;
+}
+
+@keyframes gift-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 480px) {
+    .floating-gift {
+        bottom: 16px;
+        right: 16px;
+    }
+    .gift-icon-wrapper {
+        font-size: 56px !important;
+    }
+    .gift-badge {
+        min-width: 18px;
+        height: 18px;
+        font-size: 10px;
+        top: -2px;
+        right: -4px;
+    }
+    .gift-label {
+        font-size: 9px;
+        padding: 3px 10px;
+    }
+}
+
+/* === АЛЬТЕРНАТИВНЫЕ ВАРИАНТЫ АНИМАЦИИ === */
+
+/* 1. Пульсация (увеличивается и уменьшается) */
+@keyframes gift-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+/* Замените animation: gift-bounce ... на animation: gift-pulse ... */
+
+/* 2. Вращение с подпрыгиванием */
+@keyframes gift-rotate-bounce {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(10deg) translateY(-8px); }
+    75% { transform: rotate(-10deg) translateY(-8px); }
+}
+/* Замените animation: gift-bounce ... на animation: gift-rotate-bounce 2.5s ease-in-out infinite; */
+
+/* 3. Мягкое покачивание из стороны в сторону */
+@keyframes gift-sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+/* Замените animation: gift-bounce ... на animation: gift-sway 2s ease-in-out infinite; */
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 480px) {
+    .floating-gift {
+        font-size: 44px;
+        bottom: 16px;
+        right: 16px;
+    }
+}
